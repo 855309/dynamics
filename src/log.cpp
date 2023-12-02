@@ -43,6 +43,13 @@ void clog(vec2 v, bool sp){
 	}
 }
 
+void clog(vec3 v, bool sp){
+	std::cout << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+	if(sp){
+		std::cout << " ";
+	}
+}
+
 void clnl(){
 	std::cout << std::endl;
 }

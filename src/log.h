@@ -13,6 +13,7 @@ void clog(double v, bool sp = true);
 void clog(std::string v, bool sp = true);
 void clog(cx v, bool sp = true);
 void clog(vec2 v, bool sp = true);
+void clog(vec3 v, bool sp = true);
 void clnl();
 
 #endif

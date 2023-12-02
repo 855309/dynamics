@@ -12,29 +12,29 @@ void set_itrn(int n){
 	iterations = n;
 }
 
-int esc_ords = 4; // for z^2 + c
-int iterate(cx cm, int num){
-	cx res;
-	if(cm.orad() > esc_ords) return 0;
+int iterate(cx cm, int num, double ang){
+	cx res = cm;
+	double esc_ords = cpx_fescape(cm, ang);
 	
+	if(cm.orad() > esc_ords) return num;
 	for(int i = 1; i <= num; i++){
-		res = cpx_func(res, cm);
+		res = cpx_func(res, ang);
 		if(res.orad() > esc_ords){
-			return i;
+			return num - i + 1 - log(log(res.orad()))/log(2);
+			// return i;
 		}
 	}
 	
-	return num;
+	return 0;
 }
 
-double delta = 0.0001;
 void fillpix(vec2 pos, int et){
-	vec3 col = colfunc(iterations - et, iterations, delta);
+	vec3 col = colfunc(et, iterations);
 	sf::Color cl(255 * col.x, 255 * col.y, 255 * col.z);
 	c_img.setPixel(pos.x, pos.y, cl);
 }
 
-void paint(vec2 sx, vec2 sy, int w, int h){
+void paint(vec2 sx, vec2 sy, int w, int h, double ang){
 	ins_lf(0);
 	clog("Started iteration:");
 	clog(iterations);
@@ -49,7 +49,7 @@ void paint(vec2 sx, vec2 sy, int w, int h){
 		for(int y = 0; y < h; y++){
 			double yv = sy.y - y*sc_fy;
 			cx cm(xv, yv);
-			int et = iterate(cm, iterations);
+			int et = iterate(cm, iterations, ang);
 			fillpix(vec2(x, y), et);
 		}
 	}

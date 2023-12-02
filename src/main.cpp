@@ -23,6 +23,7 @@ double arrw_drft_y = (10/((double)WIDTH))*(double)HEIGHT;
 double zoom_f = 1.05;
 bool guide_v = true;
 double guide_wd = 1;
+double ang = 0;
 int main(int argc, char** argv){
 	if(argc > 1){
 		std::stringstream sts;
@@ -46,7 +47,7 @@ int main(int argc, char** argv){
 	gh.setFillColor(gdc);
 	// --
 	
-	paint(sx, sy, WIDTH, HEIGHT);
+	paint(sx, sy, WIDTH, HEIGHT, ang);
 	
 	while (window.isOpen()){
 		sf::Event event;
@@ -55,7 +56,7 @@ int main(int argc, char** argv){
 				if(event.key.code == sf::Keyboard::I){
 					s_chg = 0;
 					s_scl = 1;
-					paint(sx, sy, WIDTH, HEIGHT);
+					paint(sx, sy, WIDTH, HEIGHT, ang);
 				}
 				if(event.key.code == sf::Keyboard::Right){
 					double sc_fx = (sx.y - sx.x)/((double)WIDTH);
@@ -112,7 +113,13 @@ int main(int argc, char** argv){
 				}
 				
 				if(event.key.code == sf::Keyboard::S){
-					guide_v = !guide_v;
+					//guide_v = !guide_v;
+					ang += M_PI/(double)12;
+					ins_lf(0);
+					clog("Ang:");
+					clog(ang/M_PI, false);
+					clog("pi rad.");
+					clnl();
 				}
 				
 				if(guide_v){

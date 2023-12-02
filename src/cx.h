@@ -20,6 +20,7 @@ public:
 	cx operator/(cx const& rhs);
 	
 	cx maxr(cx n);
+	cx square();
 	
 	std::string str();
 };

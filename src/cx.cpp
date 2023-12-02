@@ -49,6 +49,10 @@ cx cx::maxr(cx n){
 	}
 	return n;
 }
+
+cx cx::square(){
+	return cx(this->re*this->re - this->im*this->im, (this->re + this->re)*this->im);
+}
 	
 std::string cx::str(){
 	std::stringstream ss;

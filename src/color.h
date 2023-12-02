@@ -3,7 +3,6 @@
 
 #include "vec.h"
 
-double smoothsq(double x, double dlt);
-vec3 colfunc(double t, double maxt, double dlt);
+vec3 colfunc(double t, double maxt);
 
 #endif
